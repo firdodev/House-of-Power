@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public CharacterController controller;
+    public Animator animator;
     public Transform cam;
 
     private float normalSpeed;
@@ -51,7 +52,10 @@ public class PlayerMovement : MonoBehaviour
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+            animator.SetBool("Running", true);
             controller.Move(moveDir.normalized * speed * Time.deltaTime);
+        }else{
+            animator.SetBool("Running", false);
         }
 
         Jump();
